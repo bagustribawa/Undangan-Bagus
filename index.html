@@ -21,9 +21,11 @@ html,body{height:100%;background:#050403;font-family:'Cormorant Garamond',Georgi
 #stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:radial-gradient(120% 90% at 50% 20%,#4a2a14,#120b07 70%)}
 .el{position:absolute;left:0;top:0;width:100%;height:100%;will-change:transform,opacity;transform-origin:50% 50%}
 .el img.f{width:100%;height:100%;object-fit:cover;display:block}
-.fg{top:auto;bottom:0;height:62%;pointer-events:none}
-.fg svg{width:100%;height:100%;display:block}
-.fg.m svg{transform:scaleX(-1)}
+.fg{top:auto;bottom:0;height:34%;pointer-events:none}
+.fg>div{position:relative;width:100%;height:100%}
+.fg.m>div{transform:scaleX(-1)}
+.fg img{position:absolute;bottom:-6px;width:60%;height:auto;display:block;filter:drop-shadow(0 4px 10px #0008)}
+.fg .a{left:-6%;transform:scaleY(-1);transform-origin:50% 50%}.fg .b{right:-6%}
 .tx{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 28px;line-height:1.35}
 .h1{font-family:'Pinyon Script',cursive;font-weight:400;line-height:1}
 .p1{font-size:18px;font-weight:600}.p2{font-size:17px}.p3{font-size:15px}
@@ -47,8 +49,9 @@ a{color:inherit}
 #story .cd{flex:0 0 100%;scroll-snap-align:center;padding:0 26px;text-align:justify}
 #quotes{top:12%;height:auto}
 #quotes .p2{font-size:20px}
-#last{background:var(--k);padding:70px 24px 60px;text-align:center;position:relative;z-index:5}
-#last section{margin-bottom:64px}
+#last{background:var(--k);text-align:center;position:relative;z-index:5}
+#last section{min-height:100dvh;padding:130px 26px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:url(assets/flower-tl.webp) left -4% top -2px/62% auto no-repeat,url(assets/flower-br.webp) right -4% bottom -2px/62% auto no-repeat,var(--k)}
+#last section>*{max-width:100%}
 #last h2{font-family:'Pinyon Script',cursive;font-weight:400;font-size:46px;color:var(--g);margin-bottom:18px}
 #last p{font-size:18px;line-height:1.55;margin-bottom:14px}
 .cdw{display:flex;justify-content:center;gap:14px;margin:6px 0 16px}
@@ -107,7 +110,7 @@ textarea{min-height:96px;resize:vertical}
 <section id="vid" style="display:none"><h2>Prewedding</h2><iframe id="yt" width="100%" height="220" frameborder="0" allowfullscreen style="border-radius:8px"></iframe></section>
 <section><h2>Wedding Gift</h2><p>Doa restu Anda adalah hadiah terindah. Bila ingin memberi tanda kasih, dapat melalui:</p><div class="card"><p>Bank BCA</p><p class="rek" id="rk">8760956482</p><p>a.n. I Komang Bagus Tribawa</p><button class="btn" id="cp">Salin nomor</button></div><div class="card"><p>QRIS Amplop Digital</p><img src="assets/qris.png" alt="QRIS"></div></section>
 <section><h2>Ucapan &amp; Doa</h2><p>Berikan ucapan dan doa kepada kedua mempelai.</p><form id="fm"><input id="fn" placeholder="Nama" required maxlength="80"><select id="fa"><option value="">Konfirmasi kehadiran</option><option>Hadir</option><option>Tidak hadir</option><option>Belum pasti</option></select><textarea id="fx" placeholder="Tulis ucapan &amp; doa" required maxlength="500"></textarea><button class="btn" type="submit">KIRIM</button></form><div id="st"></div><div id="wl"></div></section>
-<p style="font-size:15px;opacity:.7">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Om Shanti, Shanti, Shanti, Om<br><span class="h1" style="font-size:40px;color:#d9b36c">Bagus &amp; Anggun</span></p>
+<section><p style="font-size:17px;opacity:.85">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Om Shanti, Shanti, Shanti, Om<br><span class="h1" style="font-size:54px;color:#d9b36c">Bagus &amp; Anggun</span></p></section>
 </template>
 <script>
 const SCRIPT_URL='',VIDEO_ID='',GALLERY=15,TARGET=new Date('2026-12-20T10:00:00+08:00');
@@ -124,8 +127,7 @@ $('lb').onclick=()=>$('lb').classList.remove('on');
 if(VIDEO_ID){$('vid').style.display='';$('yt').src='https://www.youtube.com/embed/'+VIDEO_ID}
 if(window.GN){$('fn').value=GN;$('fn').readOnly=true}
 $('cp').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText($('rk').textContent);$('cp').textContent='Tersalin ✓'};
-const lf='<svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMax slice"><defs><path id="l" d="M0 0C28-45 28-125 0-190C-28-125-28-45 0 0Z"/></defs><g fill="#0b0806" stroke="#d9b36c" stroke-opacity=".35">'+[[20,500,-12],[20,500,18],[20,500,40],[20,500,62],[20,500,84],[480,500,12],[480,500,-20],[480,500,-45],[480,500,-70]].map(a=>'<use href="#l" transform="translate('+a[0]+' '+a[1]+') rotate('+a[2]+') scale(1.5)"/>').join('')+'</g></svg>';
-document.querySelectorAll('.fg').forEach(e=>e.innerHTML=lf)})();
+document.querySelectorAll('.fg').forEach(e=>e.innerHTML='<div><img class="a" src="assets/flower-tl.webp" alt=""><img class="b" src="assets/flower-br.webp" alt=""></div>')})();
 // countdown
 const cd=$('cdw');function tick(){let d=Math.max(0,TARGET-Date.now()),v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];cd.innerHTML=['Hari','Jam','Menit','Detik'].map((l,i)=>'<div><b>'+String(v[i]).padStart(2,'0')+'</b><span>'+l+'</span></div>').join('')}tick();setInterval(tick,1000);
 // ucapan
@@ -145,13 +147,16 @@ function upd(pr){idx=Math.floor(pr);const lp=pr-idx,S=scenes[idx];if(!S)return;f
 function onS(){tgt=Math.min(Math.max(0,sc.scrollTop/sc.clientHeight),scenes.length)}
 function loop(){const f=scenes[idx]?scenes[idx]._sm:.015;cur+=(tgt-cur)*f;if(Math.abs(tgt-cur)>.001)upd(cur);requestAnimationFrame(loop)}
 upd(0);requestAnimationFrame(loop);
-// satu gesture scroll = satu scene penuh (halaman), setelah scene terakhir scroll bebas
+// satu gesture scroll = satu halaman penuh (scene dan semua bagian bawah)
 let busy=0;const vh=()=>sc.clientHeight,N=scenes.length;
-function paged(dir){const y=sc.scrollTop,h=vh();if(dir>0&&y>=N*h-3)return 0;if(dir<0&&y>N*h+3)return 0;return 1}
-function step(dir){if(busy)return;const h=vh(),p=Math.round(sc.scrollTop/h),q=Math.min(N,Math.max(0,p+dir));if(q==p)return;busy=1;sc.scrollTo({top:q*h,behavior:'smooth'});setTimeout(()=>busy=0,1100)}
-sc.addEventListener('wheel',e=>{if(!sc.classList.contains('open'))return;if(e.target.closest('.sw')&&Math.abs(e.deltaX)>Math.abs(e.deltaY))return;const d=Math.sign(e.deltaY);if(!d||!paged(d))return;e.preventDefault();step(d)},{passive:false});
+function pages(){const h=vh(),r=sc.getBoundingClientRect().top,a=[];for(let i=0;i<=N;i++)a.push({t:i*h,b:(i+1)*h});
+[...L.children].forEach(s=>{if(s.offsetHeight){const t=s.getBoundingClientRect().top-r+sc.scrollTop;a.push({t:t,b:t+s.offsetHeight})}});return a}
+function cur_(){const P=pages(),y=sc.scrollTop;let p=0;P.forEach((x,i)=>{if(x.t<=y+3)p=i});return[P,p,y]}
+function paged(d){if(busy)return 1;const[P,p,y]=cur_(),h=vh();if(d>0){if(p>=P.length-1)return y+h<P[p].b-3?0:1;return y+h<P[p].b-3?0:1}return y>P[p].t+3?0:1}
+function step(d){if(busy)return;const[P,p]=cur_(),h=vh(),q=p+d;if(q<0||q>=P.length)return;let top=P[q].t;if(d<0&&P[q].b-P[q].t>h)top=P[q].b-h;busy=1;sc.scrollTo({top:top,behavior:'smooth'});setTimeout(()=>busy=0,1100)}
+sc.addEventListener('wheel',e=>{if(!sc.classList.contains('open'))return;if(e.target.closest('.sw')&&Math.abs(e.deltaX)>Math.abs(e.deltaY))return;const d=Math.sign(e.deltaY);if(!d)return;if(busy){e.preventDefault();return}if(!paged(d))return;e.preventDefault();step(d)},{passive:false});
 let ty=0,tx=0,ax='';sc.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;tx=e.touches[0].clientX;ax=''},{passive:true});
-sc.addEventListener('touchmove',e=>{if(!sc.classList.contains('open'))return;const dy=ty-e.touches[0].clientY,dx=tx-e.touches[0].clientX;if(!ax&&(Math.abs(dy)>6||Math.abs(dx)>6))ax=Math.abs(dy)>=Math.abs(dx)?'y':'x';if(ax=='y'&&paged(Math.sign(dy)||1))e.preventDefault()},{passive:false});
+sc.addEventListener('touchmove',e=>{if(!sc.classList.contains('open'))return;const dy=ty-e.touches[0].clientY,dx=tx-e.touches[0].clientX;if(!ax&&(Math.abs(dy)>6||Math.abs(dx)>6))ax=Math.abs(dy)>=Math.abs(dx)?'y':'x';if(ax=='y'&&(busy||paged(Math.sign(dy)||1)))e.preventDefault()},{passive:false});
 sc.addEventListener('touchend',e=>{if(ax!='y')return;const dy=ty-e.changedTouches[0].clientY;if(Math.abs(dy)>35&&paged(Math.sign(dy)))step(Math.sign(dy))},{passive:true});
 addEventListener('keydown',e=>{if(!sc.classList.contains('open')||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;const d={ArrowDown:1,PageDown:1,' ':1,ArrowUp:-1,PageUp:-1}[e.key];if(d&&paged(d)){e.preventDefault();step(d)}});
 const au=$('au'),mus=$('mus');
